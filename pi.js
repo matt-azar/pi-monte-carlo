@@ -18,6 +18,11 @@ class MonteCarloPi {
     total = 0;
     inside = 0;
 
+    /**
+     * Constructor for the MonteCarloPi class.
+     *
+     * @param {boolean} autoStart - Whether to start the simulation automatically.
+     */
     constructor(autoStart = true) {
         this.setupCanvas();
         this.drawBoard();
