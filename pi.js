@@ -34,6 +34,8 @@ class MonteCarloPi {
 
     /**
      * Set up a 600 × 600 canvas.
+     *
+     * @returns {void}
      */
     setupCanvas() {
         this.canvas = document.createElement("canvas");
@@ -45,6 +47,8 @@ class MonteCarloPi {
 
     /**
      * Draw square and inscribed circle.
+     *
+     * @returns {void}
      */
     drawBoard() {
         const ctx = this.ctx;
@@ -65,6 +69,8 @@ class MonteCarloPi {
 
     /**
      * Create slider UI for adjusting dot delay.
+     *
+     * @returns {void}
      */
     setupSliderUI() {
         this.sliderLabel = document.createElement("label");
@@ -115,6 +121,8 @@ class MonteCarloPi {
      * @param {number} x - The x-coordinate
      * @param {number} y - The y-coordinate
      * @param {boolean} isInside - Whether the dot is inside the circle
+     *
+     * @returns {void}
      */
     drawDot(x, y, isInside) {
         const ctx = this.ctx;
@@ -128,6 +136,8 @@ class MonteCarloPi {
      * Draw statistics and computations on the canvas.
      *
      * Called by `animate()` after each dot is drawn.
+     *
+     * @returns {void}
      */
     drawStats() {
         const ctx = this.ctx;
@@ -158,6 +168,9 @@ class MonteCarloPi {
      * current ratio of dots inside the circle to total dots.
      *
      * Called by `drawStats()`.
+     *
+     * @returns {number} - The Z-score indicating how many standard deviations
+     *                     the observed proportion is from the expected value.
      */
     computeZScore() {
         // Probability of a point being inside the circle: p = pi/4
@@ -177,6 +190,8 @@ class MonteCarloPi {
 
     /**
      * Main animation loop.
+     *
+     * @returns {void}
      */
     animate() {
         const interval = parseInt(this.slider.value, 10);
