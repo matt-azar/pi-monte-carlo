@@ -112,9 +112,9 @@ class MonteCarloPi {
     /**
      * Draw a dot on the canvas. Called by `animate()`.
      *
-     * @param {*} x - The x-coordinate
-     * @param {*} y - The y-coordinate
-     * @param {*} isInside - Whether the dot is inside the circle
+     * @param {number} x - The x-coordinate
+     * @param {number} y - The y-coordinate
+     * @param {boolean} isInside - Whether the dot is inside the circle
      */
     drawDot(x, y, isInside) {
         const ctx = this.ctx;
