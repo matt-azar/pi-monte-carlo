@@ -218,3 +218,5 @@ class MonteCarloPi {
 }
 
 new MonteCarloPi();
+
+// TODO: Add a pause/resume and reset functionality
