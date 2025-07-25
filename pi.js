@@ -16,6 +16,12 @@ class MonteCarloPi {
     centerX = this.offset + this.radius;
     centerY = this.offset + this.radius;
 
+    // UI elements
+    isRunning = false;
+    timeoutId = null;
+    pauseBtn = null;
+    resetBtn = null;
+
     // Stats
     total = 0;
     inside = 0;
@@ -26,21 +32,12 @@ class MonteCarloPi {
      * @param {boolean} autoStart - Whether to start the simulation automatically.
      * @returns {void}
      */
-    // Pause/resume and reset controls
-    isRunning;
-    timeoutId;
-    pauseBtn;
-    resetBtn;
 
     constructor(autoStart = true) {
         this.setupCanvas();
         this.drawBoard();
         this.setupUI();
-        // Pause/resume and reset state
-        this.isRunning = false;
-        this.timeoutId = null;
 
-        // Automatically start the simulation if `auto` is true
         if (autoStart) {
             this.isRunning = true;
             this.animate();
@@ -271,7 +268,6 @@ class MonteCarloPi {
         if (isInside) ++this.inside;
 
         this.drawStats();
-        // Schedule next frame
         this.timeoutId = setTimeout(() => this.animate(), interval);
     }
 }
