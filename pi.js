@@ -129,7 +129,7 @@ class MonteCarloPi {
 
         // Add pause/resume button
         this.pauseBtn = document.createElement("button");
-        this.pauseBtn.textContent = "Pause";
+        this.pauseBtn.textContent = "⏸";
         this.pauseBtn.style.marginLeft = "8px";
         this.pauseBtn.addEventListener("click", () => {
             if (this.isRunning) {
@@ -152,13 +152,13 @@ class MonteCarloPi {
     pause() {
         this.isRunning = false;
         if (this.timeoutId != null) clearTimeout(this.timeoutId);
-        this.pauseBtn.textContent = "Resume";
+        this.pauseBtn.textContent = "⏵";
     }
 
     resume() {
         if (!this.isRunning) {
             this.isRunning = true;
-            this.pauseBtn.textContent = "Pause";
+            this.pauseBtn.textContent = "⏸";
             this.animate();
         }
     }
