@@ -228,6 +228,8 @@ class MonteCarloPi {
      * Compute the number of standard deviations from expectation for the
      * current ratio of dots inside the circle to total dots.
      *
+     * https://en.wikipedia.org/wiki/Standard_score
+     *
      * Called by `drawStats()`.
      *
      * @returns {number} - The Z-score indicating how many standard deviations
