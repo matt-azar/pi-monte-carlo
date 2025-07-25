@@ -1,4 +1,6 @@
 /**
+ * class: MonteCarloPi
+ *
  * Monte Carlo simulation to estimate the value of π using random sampling
  * of points in a square.
  *
@@ -22,6 +24,7 @@ class MonteCarloPi {
      * Constructor for the MonteCarloPi class.
      *
      * @param {boolean} autoStart - Whether to start the simulation automatically.
+     * @returns {void}
      */
     // Pause/resume and reset controls
     isRunning;
@@ -164,14 +167,10 @@ class MonteCarloPi {
         }
     }
 
-    // Reset simulation
     reset() {
-        // Stop running
         this.pause();
-        // Reset stats
         this.total = 0;
         this.inside = 0;
-        // Clear and redraw
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawBoard();
         this.drawStats();
