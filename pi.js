@@ -23,14 +23,23 @@ class MonteCarloPi {
      *
      * @param {boolean} autoStart - Whether to start the simulation automatically.
      */
+    // Pause/resume and reset controls
+    isRunning;
+    timeoutId;
+    pauseBtn;
+    resetBtn;
+
     constructor(autoStart = true) {
         this.setupCanvas();
         this.drawBoard();
-        this.setupSliderUI();
+        this.setupUI();
+        // Pause/resume and reset state
+        this.isRunning = false;
+        this.timeoutId = null;
 
         // Automatically start the simulation if `auto` is true
         if (autoStart) {
-            // this.drawStats();
+            this.isRunning = true;
             this.animate();
         }
     }
@@ -73,11 +82,14 @@ class MonteCarloPi {
     }
 
     /**
-     * Create slider UI for adjusting dot delay.
+     * Set up the user interface elements.
+     *
+     * Interface includes a slider to adjust the delay between dots,
+     * a pause/resume button, and a reset button.
      *
      * @returns {void}
      */
-    setupSliderUI() {
+    setupUI() {
         this.sliderLabel = document.createElement("label");
         this.sliderLabel.textContent = "Dot delay: ";
         this.sliderLabel.style.font = "16px sans-serif";
@@ -115,7 +127,54 @@ class MonteCarloPi {
         this.controlsDiv.appendChild(this.sliderLabel);
         this.controlsDiv.appendChild(this.slider);
         this.controlsDiv.appendChild(this.sliderValue);
+
+        // Add pause/resume button
+        this.pauseBtn = document.createElement("button");
+        this.pauseBtn.textContent = "Pause";
+        this.pauseBtn.style.marginLeft = "8px";
+        this.pauseBtn.addEventListener("click", () => {
+            if (this.isRunning) {
+                this.pause();
+            } else {
+                this.resume();
+            }
+        });
+        this.controlsDiv.appendChild(this.pauseBtn);
+
+        // Add reset button
+        this.resetBtn = document.createElement("button");
+        this.resetBtn.textContent = "Reset";
+        this.resetBtn.style.marginLeft = "8px";
+        this.resetBtn.addEventListener("click", () => this.reset());
+        this.controlsDiv.appendChild(this.resetBtn);
         document.body.appendChild(this.controlsDiv);
+    }
+
+    pause() {
+        this.isRunning = false;
+        if (this.timeoutId != null) clearTimeout(this.timeoutId);
+        this.pauseBtn.textContent = "Resume";
+    }
+
+    resume() {
+        if (!this.isRunning) {
+            this.isRunning = true;
+            this.pauseBtn.textContent = "Pause";
+            this.animate();
+        }
+    }
+
+    // Reset simulation
+    reset() {
+        // Stop running
+        this.pause();
+        // Reset stats
+        this.total = 0;
+        this.inside = 0;
+        // Clear and redraw
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.drawBoard();
+        this.drawStats();
     }
 
     // --- Loop methods ---
@@ -199,6 +258,7 @@ class MonteCarloPi {
      * @returns {void}
      */
     animate() {
+        if (!this.isRunning) return;
         const interval = parseInt(this.slider.value, 10);
         const x = Math.random() * this.squareSize + this.offset;
         const y = Math.random() * this.squareSize + this.offset;
@@ -212,11 +272,9 @@ class MonteCarloPi {
         if (isInside) ++this.inside;
 
         this.drawStats();
-
-        setTimeout(() => this.animate(), interval);
+        // Schedule next frame
+        this.timeoutId = setTimeout(() => this.animate(), interval);
     }
 }
 
 new MonteCarloPi();
-
-// TODO: Add a pause/resume and reset functionality
