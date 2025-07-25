@@ -32,7 +32,6 @@ class MonteCarloPi {
      * @param {boolean} autoStart - Whether to start the simulation automatically.
      * @returns {void}
      */
-
     constructor(autoStart = true) {
         this.setupCanvas();
         this.drawBoard();
