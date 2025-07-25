@@ -4,4 +4,4 @@ Monte Carlo simulation to estimate the value of π using random sampling of poin
 
 ## How to run
 
-Download `pi.js` and `pi.html`. Make sure both files are in the same folder then simply open `pi.html` in a web browser (drag and drop).
+Download `pi.js` and `index.html`. Make sure both files are in the same folder then simply open `index.html` in a web browser (drag and drop).
